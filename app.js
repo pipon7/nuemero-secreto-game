@@ -1,1 +1,1 @@
-document.querySelector()
+let titulo = document.querySelector('h1')
