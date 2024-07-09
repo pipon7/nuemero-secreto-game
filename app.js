@@ -5,21 +5,30 @@
 parrafo.innerHTML = 'Indica un numero del 1 al 10.'; */
 
 //Variables.
-let numeroSecreto = generarNumeroSecreto(); //Esta variable funciona ya que los fuctions no importan en que orden del codigo esten.
-
+let numeroSecreto = 0;
+let intentos = 0;
+console.log(numeroSecreto);
 
 // function = hacer una accion
 function verificarIntento() {
     let numeroDeUsuario = parseInt(document.getElementById('valorUsuario').value); //getelementbyid para seleccionar un ID de html y el .value es para tomar el valor ingresado
-    console.log(numeroSecreto);
-    if (numeroDeUsuario === numeroSecreto) {
-        asignarTextoElemento('p', 'Acertaste el número');
-    } else if (numeroDeUsuario > numeroSecreto) {
+
+    if (numeroDeUsuario === numeroSecreto) { //acerto
+        asignarTextoElemento('p', `Acertaste el número en ${intentos} ${intentos === 1 ? 'intento' : 'intentos'}`);
+        document.querySelector('#reiniciar').removeAttribute('disabled');
+    } else if (numeroDeUsuario > numeroSecreto) { //no acerto
         asignarTextoElemento('p', 'El numero secreto es menor');
-        }    else {
+    } else {
             asignarTextoElemento('p', 'El numero secreto es mayor')
-        }
+    }
+    intentos++;
+    limpiarCaja();
     return;
+}
+
+function limpiarCaja() {
+    let valorEscrito = document.querySelector('#valorUsuario').value = '';
+    /* valorEscrito.value = ''; esto es igual al cod d arriba pero sin el .value = ''; */
 }
 
 /* En este caso fuction crea la variable asignarTextoElemento 
@@ -35,9 +44,26 @@ function asignarTextoElemento(elemento, texto) {
     return;
 }
 
+function condicionesIniciales() {
+    asignarTextoElemento('h1', 'Juego del numero secreto');
+    asignarTextoElemento('p', 'Indica un numero del 1 al 10.');
+    numeroSecreto = generarNumeroSecreto();
+    intentos = 1;
+}
+
 function generarNumeroSecreto() {
     return Math.floor(Math.random()*10) + 1;
 }
 
-asignarTextoElemento('h1', 'Juego del numero secreto');
-asignarTextoElemento('p', 'Indica un numero del 1 al 10.');
+function reiniciarJuego(){
+    // limpiar caja
+    limpiarCaja();
+    // generar nuevo num aleatorio
+    // reiniciar el numero de intentos
+    // indicar el mensaje de inicio
+    condicionesIniciales();
+    // deshabilitar el boton de reinciar juego
+    document.querySelector('#reiniciar').setAttribute('disabled', 'true');
+}
+
+condicionesIniciales();
