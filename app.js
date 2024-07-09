@@ -11,11 +11,14 @@ let numeroSecreto = generarNumeroSecreto(); //Esta variable funciona ya que los 
 // function = hacer una accion
 function verificarIntento() {
     let numeroDeUsuario = parseInt(document.getElementById('valorUsuario').value); //getelementbyid para seleccionar un ID de html y el .value es para tomar el valor ingresado
-    console.log(typeof(numeroDeUsuario)); // con typeof imprime si lo ingresado es una letra, numero etc
-    console.log(numeroDeUsuario);
-    console.log(typeof(numeroSecreto));
     console.log(numeroSecreto);
-    console.log(numeroDeUsuario === numeroSecreto); //si la condicion se da, se imprimira en la consola un true, si no se da, un false. El triple igual es para que coincida en el numero y tipo de dato(el numero literal y si es un numero, letra etc.)
+    if (numeroDeUsuario === numeroSecreto) {
+        asignarTextoElemento('p', 'Acertaste el número');
+    } else if (numeroDeUsuario > numeroSecreto) {
+        asignarTextoElemento('p', 'El numero secreto es menor');
+        }    else {
+            asignarTextoElemento('p', 'El numero secreto es mayor')
+        }
     return;
 }
 
