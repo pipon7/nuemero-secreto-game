@@ -7,6 +7,7 @@ parrafo.innerHTML = 'Indica un numero del 1 al 10.'; */
 //Variables.
 let numeroSecreto = 0;
 let intentos = 0;
+let listaNumerosSorteados = [];
 console.log(numeroSecreto);
 
 // function = hacer una accion
@@ -52,7 +53,14 @@ function condicionesIniciales() {
 }
 
 function generarNumeroSecreto() {
-    return Math.floor(Math.random()*10) + 1;
+    let numeroGenerado = Math.floor(Math.random()*10) + 1;
+    //Si el numero generado esta incluido en la lista
+    if (listaNumerosSorteados.includes(numeroGenerado)) {
+        return generarNumeroSecreto();
+    }   else {
+        listaNumerosSorteados.push(numeroGenerado);
+        return numeroGenerado
+    }
 }
 
 function reiniciarJuego(){
